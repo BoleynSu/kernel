@@ -14,7 +14,7 @@ mov $kernel_stack, %esp
 call kernel_main
 jmp entry
 
-.section .data
+.section .bss
 .space 1024
 kernel_stack:
 

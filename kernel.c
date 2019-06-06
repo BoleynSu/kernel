@@ -17,9 +17,10 @@ int f(int x) {
 
 void kernel_main() {
   unsigned char* vm = (unsigned char*) 0xb8000;
+  const char* c = "0123456789abcdef";
   int addr = (int) (&vm);
-  for (int i = 0; i < 10; i++) {
-    vm[i * 2] = addr % 10 + '0';
+  for (int i = 0; i < 8; i++) {
+    vm[2000 + (8 - i) * 2] = c[addr % 16];
     addr /= 10;
   }
   printf("Hello world!");
@@ -28,3 +29,4 @@ void kernel_main() {
     printf(s);
   }
 }
+
