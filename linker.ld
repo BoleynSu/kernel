@@ -2,6 +2,8 @@ ENTRY(entry)
 
 SECTIONS
 {
+	. = 0x00100000;
+
   	/* text section */
 	.text BLOCK(4K) : ALIGN(4K)
 	{
