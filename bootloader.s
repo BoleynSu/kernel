@@ -8,14 +8,12 @@
 .long CHECKSUM
 
 .section .text
-.space 1024
-kernel_stack:
-
 .global entry
 entry:
 mov $kernel_stack, %esp
 call kernel_main
+jmp entry
 
-halt:
-  hlt
-  jmp halt
+.section .data
+.space 1024
+kernel_stack:
