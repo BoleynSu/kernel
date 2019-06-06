@@ -11,6 +11,8 @@
 .space 1024
 kernel_stack:
 
+.global entry
+entry:
 mov $kernel_stack, %esp
 call kernel_main
 
