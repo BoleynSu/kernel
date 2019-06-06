@@ -16,6 +16,12 @@ int f(int x) {
 }
 
 void kernel_main() {
+  unsigned char* vm = (unsigned char*) 0xb8000;
+  int addr = (int) (&vm);
+  for (int i = 0; i < 10; i++) {
+    vm[i * 2] = addr % 10 + '0';
+    addr /= 10;
+  }
   printf("Hello world!");
   for (int i = 0; ; ++i) {
     char s[2] = {'0' + (f(i) % 10), 0};

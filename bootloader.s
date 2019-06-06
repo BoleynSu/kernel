@@ -17,3 +17,4 @@ jmp entry
 .section .data
 .space 1024
 kernel_stack:
+

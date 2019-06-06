@@ -1,7 +1,7 @@
 all:
 	as --32 bootloader.s -o bootloader.o
 	gcc -m32 -c kernel.c -o kernel.o -ffreestanding -O2
-	ld -m elf_i386 kernel.o bootloader.o -T linker.ld -o os.bin
+	ld -melf_i386 kernel.o bootloader.o -T linker.ld -o os.bin -nostdlib
 clean:
 	rm *.o os.bin os.iso root/boot/os.bin
 test: all
