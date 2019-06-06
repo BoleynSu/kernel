@@ -11,6 +11,7 @@
 .global entry
 entry:
 mov $kernel_stack, %esp
+call kernel_init
 call kernel_main
 jmp entry
 

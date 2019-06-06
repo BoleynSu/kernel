@@ -1,5 +1,10 @@
+int cur;
+
+void kernel_init() {
+  cur = 0;
+}
+
 void printf(const char* str) {
-  static int cur = 0;
   unsigned char* vm = (unsigned char*) 0xb8000;
   for (int i = 0; str[i]; ++i) {
     vm[cur] = str[i];
@@ -21,7 +26,12 @@ void kernel_main() {
   int addr = (int) (&vm);
   for (int i = 0; i < 8; i++) {
     vm[2000 + (8 - i) * 2] = c[addr % 16];
-    addr /= 10;
+    addr /= 16;
+  }
+  addr = cur;
+  for (int i = 0; i < 8; i++) {
+    vm[2026 + (8 - i) * 2] = c[addr % 16];
+    addr /= 16;
   }
   printf("Hello world!");
   for (int i = 0; ; ++i) {
