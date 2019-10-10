@@ -4,9 +4,7 @@ void kernel_init() {
 }
 
 void print_str(const char* str) {
-  unsigned char* vm = (unsigned char*) 0xb8000;
   for (int i = 0; str[i]; ++i) {
-    set_color(i % 15 + 1,VGA_COLOR_BLACK);
     draw_next(str[i]);
   }
 }
@@ -22,6 +20,12 @@ void print_int(int x) {
     buffer[cur++] = '0' + x % 10;
     x /= 10;
   } while(x != 0);
+  int i = buffer['0'] == '-', j = cur - 1;
+  while (i < j) {
+    char swap = buffer[i];
+    buffer[i++] = buffer[j];
+    buffer[j--] = swap;
+  }
   buffer[cur++] = 0;
   print_str(buffer);
 }
@@ -34,9 +38,10 @@ int f(int x) {
 void kernel_main(void* ptr, int magic) {
   kernel_init();
   print_str("Hello world!");
-  for (int i = 0; i < 1000000000; ++i) {
+  for (int i = 0; ; ++i) {
+    set_color(i % 15 + 1, VGA_COLOR_BLACK);
     print_str(" ");
-    print_int(f(i % 30));
+    print_int(f(i));
   }
 }
 

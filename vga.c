@@ -21,5 +21,5 @@ void draw_next(char data) {
   }
   vga->cells[vga_current_position].data = data;
   vga->cells[vga_current_position].color = vga_current_color;
-  vga_current_position++;
+  ++vga_current_position;
 }
