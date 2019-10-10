@@ -2,7 +2,7 @@ ENTRY(entry)
 
 SECTIONS
 {
-	. = 0x00100000;
+	. = 1M;
 
   	/* text section */
 	.text BLOCK(4K) : ALIGN(4K)

@@ -1,8 +1,9 @@
 .set MAGIC, 0x1badb002
-.set FLAGS, 0
+.set FLAGS, 1 << 0 | 1 << 1
 .set CHECKSUM, -(MAGIC + FLAGS)
 
 .section .multiboot
+.align 4
 .long MAGIC
 .long FLAGS
 .long CHECKSUM
@@ -11,11 +12,16 @@
 .global entry
 entry:
 mov $kernel_stack, %esp
-call kernel_init
+push %eax
+push %ebx
 call kernel_main
-jmp entry
+cli
+loop:
+hlt
+jmp loop
 
 .section .bss
-.space 1024
+.align 16
+.space 1 << 20
 kernel_stack:
 
