@@ -1,6 +1,6 @@
 #include "vga.h"
 
-static struct vga* vga = 0xb8000;
+static struct vga * const vga = (struct vga*) 0xb8000;
 static unsigned char vga_current_color = 0;
 static short vga_current_position = 0;
 
